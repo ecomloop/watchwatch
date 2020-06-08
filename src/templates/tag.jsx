@@ -44,14 +44,14 @@ const Tag = ({ pageContext }) => {
         title={`${title} | ${config.title}`}
       />
       <Header title={upperTag}>
-        <StyledLink to="/tags">All Tags</StyledLink>
+        
       </Header>
         <TagWrapper>
           {posts.map((node) => (
             <PostList
               key={node.name}
               cover={node.imageurl}
-              path={`/shops/${node.slug}`}
+              path={`/${node.slug}`}
               title={node.name}
               excerpt={node.about && node.about.substring(0,40)+"..."}
             />

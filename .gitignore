@@ -1,3 +1,7 @@
+# large media file
+media/
+content/media/
+
 # Logs
 logs
 *.log

@@ -6,18 +6,13 @@ import { Layout, Container } from 'layouts';
 
 const About = center => (
   <Layout>
-    <Helmet title={'About'} />
-    <Header title="About">🧐 Discover exceptional retailers & innovative brands<br/>🛒 Shop direct to support independent businesses</Header>
+    <Helmet title={'about'} />
+    <Header title="about"></Header>
     <Container center={center}>
-    <p>
-    We help consumers discover, support& shop independent brands & retailers.
-</p>  <p>
-    Large platforms like Amazon and Target control an increasily large share of ecommerce sales. Platforms are convenient and great for deliveing basic goods. They are not good for find discovering the very best products
-</p>  <p>
-    Support innovation among indepndenent brands by shopping directly. 
-</p>  <p>
-    The list of shops is intended to grow over time, as is the functionality of the site. New submissions are always welcome.
-</p>
+  <p>watchwatch.org documents unnecessary violence by law enforcement officers against civilians</p>
+  <p>inspired by <a href="https://twitter.com/greg_doucette/">@greg_doucette</a>'s twitter <a href="https://twitter.com/greg_doucette/status/1266751520055459847">thread of hundreds of incidents</a></p>
+  <p>data compiled by <a href="https://twitter.com/jasonemiller">@jasonemiiller</a> in a <a href="https://docs.google.com/spreadsheets/d/1YmZeSxpz52qT-10tkCjWOwOGkQqle7Wd1P7ZM1wMW0E/edit#gid=0">shareable spreadsheet</a></p>
+    <p className="madeby"><a href="https://ecomloop.com" target="_blank">built by ecomloop in </a></p>
     </Container>
   </Layout>
 );

@@ -1,7 +1,6 @@
 const path = require('path');
 const _ = require("lodash");
 const fetch = require("node-fetch");
-const FeedParser = require("feedparser");
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
@@ -16,7 +15,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       youtube_link: String
       comment: String
       slug: String
-
+      fields: fields
+    }
+    type fields {
+      tweetEmbedData: String
     }
   `)
 }
@@ -47,9 +49,11 @@ exports.createPages = ({ graphql, actions }) => {
                   state
                   tweet_url
                   media_filename
-                  youtube_link
+                  youtubelink
                   comment
                   slug
+                  tags
+                  imageurl
                 }
               }
             }
@@ -213,6 +217,143 @@ exports.createPages = ({ graphql, actions }) => {
 
   });
 };
+
+const momentRegexp = /https:\/\/twitter.com\/i\/moments\/[0-9]+/i;
+const tweetRegexp = /https:\/\/twitter\.com\/[A-Za-z0-9-_]*\/status\/[0-9]+/i;
+
+const isTwitterLink = (url) => {
+  return url &&
+    (tweetRegexp.test(url) ||
+     momentRegexp.test(url));
+}
+
+const getTweetBlockquote = async (url, opt) => {
+  const apiUrl = `https://publish.twitter.com/oembed?url=${
+    url
+  }&hide_thread=${
+    opt.hideThread !== false ? '1' : '0'
+  }&align=${
+    opt.align || ''
+  }&hide_media=${
+    opt.hideMedia ? '1' : '0'
+  }&theme=${
+    opt.theme || ''
+  }&link_color=${
+    opt.linkColor || ''
+  }&widget_type=${
+    opt.widgetType || ''
+  }&omit_script=true&dnt=true&limit=20&chrome=nofooter`
+
+  const response = await fetch(apiUrl);
+  if (response.status !== 200) {
+    console.warn("** Bad status code from twitter url '"+url+"' : "+response.status);
+    return null;
+  }
+  return await response.json();
+};
+
+const isYoutubeLink = (url) => {
+  const { host, pathname, searchParams } = new URL(url);
+  return (
+    host === 'youtu.be' ||
+    (['youtube.com', 'www.youtube.com'].includes(host) &&
+      pathname.includes('/watch') &&
+      Boolean(searchParams.get('v')))
+  );
+}
+const getYoutubeTimeValueInSeconds = (timeValue) => {
+  if (Number(timeValue).toString() === timeValue) {
+    return timeValue;
+  }
+  const {
+    2: hours = '0',
+    4: minutes = '0',
+    6: seconds = '0',
+  } = timeValue.match(/((\d*)h)?((\d*)m)?((\d*)s)?/);
+  return String((Number(hours) * 60 + Number(minutes)) * 60 + Number(seconds));
+};
+const getYouTubeIFrameSrc = (urlString) => {
+  const url = new URL(urlString);
+  let id = url.searchParams.get('v');
+  if (url.host === 'youtu.be') {
+    id = url.pathname.slice(1);
+  }
+  const embedUrl = new URL(
+    `https://www.youtube-nocookie.com/embed/${id}?rel=0`
+  );
+  url.searchParams.forEach((value, name) => {
+    if (name === 'v') {
+      return;
+    }
+    if (name === 't') {
+      embedUrl.searchParams.append('start', getTimeValueInSeconds(value));
+    } else {
+      embedUrl.searchParams.append(name, value);
+    }
+  });
+  return embedUrl.toString();
+};
+const getYouTubeEmbedHTML = (url) => {
+  const iframeSrc = getYouTubeIFrameSrc(url);
+  return `<iframe width="100%" height="315" src="${iframeSrc}" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>`;
+};
+
+exports.onCreateNode = async ({ node, actions }) => {
+  const { createNodeField } = actions
+    //handling tweets
+  if (node.internal
+      && node.internal.owner === 'gatsby-source-google-sheets'
+      && node.url
+      && node.url.startsWith("http")
+  ) {
+    const tweetLink = node.url;
+
+    let embedDataHTML = "";
+    try {
+      if(isTwitterLink(tweetLink)){
+        console.log("******* Tweet URL = "+tweetLink);
+        const embedData = await getTweetBlockquote(tweetLink, []);
+        embedDataHTML = embedData ? embedData.html : ""
+      } else {
+        console.warn('SKIPPING NON-TWITTER url = '+tweetLink)
+      }
+    } catch (er) {
+      console.warn(`failed to get blockquote for ${tweetLink}`, er)
+    }
+    createNodeField({
+        name: 'tweetEmbedData', // field name
+        node, // the node on which we want to add a custom field
+        value: embedDataHTML // field value
+    });
+  }
+  
+  //handling youtube videos
+  if (node.internal
+      && node.internal.owner === 'gatsby-source-google-sheets'
+      && node.youtubelink
+      && node.youtubelink.startsWith("http")
+  ) {
+    const youtubeLink = node.youtubelink;
+    let embedDataHTML = "";
+    try {
+      if(isYoutubeLink(youtubeLink)){
+        console.log("******* Youtube Link = "+youtubeLink);
+        const embedData = getYouTubeEmbedHTML(youtubeLink);
+        embedDataHTML = embedData || "";
+      } else {
+        console.warn('SKIPPING NON-YOUTUBE Link = '+youtubeLink)
+      }
+    } catch (er) {
+      console.warn(`failed to get embed for ${youtubeLink}`, er)
+    }
+    createNodeField({
+        name: 'youtubeEmbedData', // field name
+        node, // the node on which we want to add a custom field
+        value: embedDataHTML // field value
+    });
+  }
+};
+
 
 /* Allows named imports */
 exports.onCreateWebpackConfig = ({ actions }) => {

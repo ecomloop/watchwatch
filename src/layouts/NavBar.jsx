@@ -2,11 +2,11 @@ import React from 'react';
 import { Link, useStaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
 import Headroom from 'react-headroom';
-import logo from '../../static/logo/header-logo.png';
+import logo from '../../static/logo/logo.png';
 import Search from '../components/search'
 
 const searchIndices = [
-  { name: `watchwatch`, title: `search`, type: `hit` },
+  { name: `watchwatch`, title: `incidents`, type: `hit` },
 ]
 
 const StyledLink = styled(Link)`
@@ -145,18 +145,11 @@ const NavBar = () => {
   return (
     <Headroom calcHeightOnResize disableInlineStyles>
       <StyledLink to="/">
-        <img src="" alt="WatchWatch.org" />
+          WatchWatch.org
       </StyledLink>
       <NavWrapper>
         <Nav>
-          <div className="dropdown">
-            <Link to="/list">view </Link>
-            <div className="dropdown-content">
-              {uniqueCategoriesMap.map((item) => (
-                <Link key={item.url} to={`/category/${item.url}`} > {item.text}</Link>
-              ))}
-            </div>
-          </div>
+
 
           <SearchWrapper>
             <Search collapse indices={searchIndices} variation={"light"} />

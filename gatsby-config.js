@@ -19,16 +19,11 @@ module.exports = {
         path: `${__dirname}/content/posts`,
       },
     },
-    'gatsby-plugin-react-helmet',
     {
-    resolve: '@fs/gatsby-plugin-drive',
-    options: {
-      folderId: '1zniqs5KlQJffey_FOHDlb-Ghy0Hikl_w',
-      keyFile: `${__dirname}/client_secret.json`,
-      destination: `${__dirname}/content/media`,
-      exportGDocs: false,
-      exportMimeType: ''
-      }
+    resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-86276502-4",
+      },
     },
     'gatsby-transformer-sharp',
     {
@@ -43,7 +38,6 @@ module.exports = {
               linkImagesToOriginal: true,
             },
           },
-
           'gatsby-remark-prismjs',
         ],
       },
@@ -57,11 +51,7 @@ module.exports = {
         plugins: [
           'gatsby-plugin-twitter'
         ]
-
-
       }
-
-
     },
     {
       resolve: `gatsby-plugin-remote-images`,
@@ -87,6 +77,15 @@ module.exports = {
     },
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.GATSBY_ALGOLIA_APP_ID,
+        apiKey: process.env.ALGOLIA_ADMIN_KEY,
+        queries,
+        chunkSize: 10000, // default: 1000
+      },
+    },
     `gatsby-plugin-styled-components`,
     {
       resolve: 'gatsby-plugin-manifest',

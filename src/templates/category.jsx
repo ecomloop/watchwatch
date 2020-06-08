@@ -57,7 +57,7 @@ export const query = graphql`
     allGoogleSheetListRow(filter: {category: {eq: $category}}) {
       edges {
         node {
-          id
+          date
           name
           category
           tags

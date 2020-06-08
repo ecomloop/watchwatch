@@ -47,35 +47,41 @@ const Index = ({ data }) => {
   const { edges } = data.allMarkdownRemark;
   const rowEdges = data.allGoogleSheetListRow.edges;
   const listEdges = [];
-  const maxItems = 9;
+  const maxItems = 12;
+  const [limit, setLimit] = React.useState(maxItems);
+  const [showMore, setShowMore] = React.useState(true);
 
   const searchIndices = [
-    { name: `watchwatch`, title: `Shops`, type: `shopHit` },
+    { name: `watchwatch`, title: `incidents`, type: `hit` },
   ]
+
+  const increaseLimit = () => {
+      setLimit(limit + maxItems);
+  }
 
   //filtering home and food items maximum to 6 items
   rowEdges.map((edge) => {
-    if(edge.node.category && edge.node.category != "" && listEdges.length<maxItems) {
+    if (edge.node.category && edge.node.category != "" && listEdges.length < limit) {
       listEdges.push(edge);
     }
-
   })
+  if(listEdges.length >= rowEdges.length) setShowMore(false);
 
   return (
     <Layout>
       <Helmet title={'WatchWatch.org'} />
-      <Header title="documenting unnecessary police violence"></Header>
+      <Header title="documenting violence by law enforcement against civilians"></Header>
 
 
-      <div class="center">
-
+      <div className="search_main">
+        <Search collapse homepage indices={searchIndices} />
       </div>
-      <div class="search_main">
-            <Search collapse homepage indices={searchIndices} />
-
-            </div>
-
-      <ShopSectionHeading></ShopSectionHeading>
+      <div className="text_main center">
+      <p>watchwatch.org documents unnecessary violence by law enforcement officers against civilians</p>
+      <p>inspired by the <a href="https://twitter.com/greg_doucette/status/1266751520055459847">massive twitter thread</a> by <a href="https://twitter.com/greg_doucette/">@greg_doucette</a></p>
+      <p>data compiled by <a href="https://twitter.com/jasonemiller">@jasonemiiller</a> in a <a href="https://docs.google.com/spreadsheets/d/1YmZeSxpz52qT-10tkCjWOwOGkQqle7Wd1P7ZM1wMW0E/edit#gid=0">google spreadsheet</a></p>
+      </div>
+      
 
       <ShopWrapper>
 
@@ -86,12 +92,18 @@ const Index = ({ data }) => {
               cover={node.localImageUrl && node.localImageUrl.childImageSharp.fluid}
               path={`/${node.slug}`}
               title={node.name}
-              excerpt={node.about && node.about.substring(0,40)+"..."}
+              excerpt={node.about && node.about.substring(0, 40) + "..."}
             />
           );
         })}
       </ShopWrapper>
-
+      {showMore && listEdges.length > 0 &&
+        <div className="center">
+            <a className="button" onClick={increaseLimit} style={{cursor: "pointer"}}>
+                Load More
+            </a>
+        </div>
+      }
     </Layout>
   );
 };
@@ -122,8 +134,8 @@ Index.propTypes = {
 export const query = graphql`
   query {
     allMarkdownRemark(
-      limit: 9
-      sort: { order: DESC, fields: [frontmatter___date] }
+      limit: 6
+      sort: { order: ASC, fields: [frontmatter___date] }
     ) {
       edges {
         node {
@@ -141,7 +153,7 @@ export const query = graphql`
                   quality: 90
                   traceSVG: { color: "#2B2B2F" }
                 ) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  ...GatsbyImageSharpFluid_tracedSVG
                 }
               }
             }
@@ -151,11 +163,12 @@ export const query = graphql`
     }
 
     allGoogleSheetListRow(
-      limit: 90
+      sort: { order: DESC, fields: date }
     )
     {
       edges {
         node {
+          date
           name
           url
           slug
@@ -168,10 +181,10 @@ export const query = graphql`
             childImageSharp {
               fluid(
                 maxWidth: 1000
-                quality: 100
+                quality: 90
                 traceSVG: { color: "#2B2B2F" }
               ) {
-                ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                ...GatsbyImageSharpFluid_tracedSVG
               }
             }
           }

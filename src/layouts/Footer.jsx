@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useStaticQuery } from 'gatsby';
 import styled from '@emotion/styled';
-import logo from '../../static/logo/header-logo.png';
+
 
 const Wrapper = styled.footer`
   position: relative;
@@ -31,7 +31,7 @@ const Footer = () => (
 
         <div><Link to="/contact"> contact </Link> |
           <Link to="/about"> about </Link> <br/>
-        <p class="madeby"><a href="https://ecomloop.com" target="_blank">built in california</a></p></div>
+        </div>
 
       </div>
     </Text>

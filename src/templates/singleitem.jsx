@@ -1,10 +1,10 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
+import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import { Layout, Container, Content } from 'layouts';
 import { TagsBlock, Header, SEO } from 'components';
-import AtomFeedList from '../components/AtomFeedList';
 import '../styles/prism';
 
 const SuggestionBar = styled.div`
@@ -57,14 +57,49 @@ const StatisticIcon = styled.img`
   margin-top: 5px;
 `;
 
+const twitterStyles = css`
+blockquote.twitter-tweet {
+  display: inline-block;
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 16px;
+  border-color: #eee #ddd #bbb;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  margin: 10px 5px;
+  padding: 0 16px 16px 16px;
+  max-width: 468px;
+}
+
+blockquote.twitter-tweet p {
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 20px;
+}
+
+blockquote.twitter-tweet a {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+  outline: 0 none;
+}
+
+blockquote.twitter-tweet a:hover,
+blockquote.twitter-tweet a:focus {
+  text-decoration: underline;
+}
+`
+
 const SingleItem = ({ data, pageContext }) => {
   const { next, prev } = pageContext;
-  const { name, date, slug, imageurl, url, category, tags, localImageUrl, about, state, city } = data.googleSheetListRow
+  const { name, date, slug, imageurl, url, fields, mediafile, category, tags, localImageUrl, about, state, city } = data.googleSheetListRow
 
   //converting comma seperated tags to tags map
   const tagsList = tags ? tags.split(',') : [];
   const image = localImageUrl ? localImageUrl.childImageSharp.fluid : null;
-
 
   return (
     <Layout>
@@ -84,15 +119,13 @@ const SingleItem = ({ data, pageContext }) => {
           </div>
         </div>
         <TagsBlock list={tagsList || []} />
+
+        <Content input={fields.youtubeEmbedData} /><br />
         <Content input={about} /><br />
-        <Content input={url} /><br />
+        <Content input={fields.tweetEmbedData} /><br />
 
-
-
-
-
-        <a target="_blank" href={url} className="button">View on Twitter</a> <a href="/random" className="button buttonalt">See another incident</a>
-
+         <a href="/random" className="button ">See another incident</a> <a target="_blank" href={url} className="button buttonalt">View on Twitter</a>
+{/*<Content input={about} /><br />  */}
       </Container>
       <SuggestionBar>
         <PostSuggestion>
@@ -123,11 +156,17 @@ export const query = graphql`
     googleSheetListRow(slug: {eq: $pathSlug}) {
       id
       name
+      date
       city
       state
       url
-      media_filename
+      fields {
+        tweetEmbedData
+        youtubeEmbedData
+      }
+      mediafile
       youtube_link
+      tags
       about
       slug
       imageurl
