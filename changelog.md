@@ -1,6 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v0.2.4 - 2020.06.08
+added new entries [587 total, tgd 423]
+added state names for search purposes
+updated homepage about links to open in new tab
+added heading to listings on homepage
+changed style of search boxes to fixed-focused state
+revised background image layout on tags list template page
+
 ## v0.2.3 - 2020.06.08
 added new entries [586 total, tgd 421]
 
@@ -15,7 +23,7 @@ added 'about' info to home page
 
 ## v0.2.0 - 2020.06.08
 added embedded youtube videos
-fixed search links from incident pages [noted here https://twitter.com/NoahSD/status/1269864668559839232]
+fixed search links from incident pages [problem noted here https://twitter.com/NoahSD/status/1269864668559839232]
 added continuous scroll on homepage
 added tags to incident pages
 
