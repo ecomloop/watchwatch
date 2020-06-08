@@ -82,9 +82,9 @@ const Index = ({ data }) => {
       <p>data compiled by <a href="https://twitter.com/jasonemiller" target="_twitter" rel="noopener">@jasonemiiller</a> in a <a href="https://docs.google.com/spreadsheets/d/1YmZeSxpz52qT-10tkCjWOwOGkQqle7Wd1P7ZM1wMW0E/edit#gid=0" target="_twitter" rel="noopener">google spreadsheet</a></p>
       </div>
 
-      <ListHeader>
+      <ShopSectionHeading>
       <h3>Latest incidents</h3>
-      </ListHeader>
+      </ShopSectionHeading>
       <ShopWrapper>
 
         {listEdges.map(({ node }) => {
