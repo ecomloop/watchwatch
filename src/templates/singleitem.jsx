@@ -99,7 +99,7 @@ const SingleItem = ({ data, pageContext }) => {
 
   //converting comma seperated tags to tags map
   const tagsList = tags ? tags.split(',') : [];
-  const image = localImageUrl ? localImageUrl.childImageSharp.fluid : null;
+  const image = localImageUrl ? localImageUrl.childImageSharp.fluid.src : imageurl;
 
   return (
     <Layout>
@@ -119,9 +119,9 @@ const SingleItem = ({ data, pageContext }) => {
           </div>
         </div>
         <TagsBlock list={tagsList || []} />
-
-        <Content input={fields.youtubeEmbedData} /><br />
         <Content input={about} /><br />
+        <Content input={fields.youtubeEmbedData} /><br />
+        <Content input={fields.videoEmbedData} /><br />
         <Content input={fields.tweetEmbedData} /><br />
 
          <a href="/random" className="button ">See another incident</a> <a target="_blank" href={url} className="button buttonalt">View on Twitter</a>
@@ -163,6 +163,7 @@ export const query = graphql`
       fields {
         tweetEmbedData
         youtubeEmbedData
+        videoEmbedData
       }
       mediafile
       youtube_link

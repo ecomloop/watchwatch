@@ -5,7 +5,7 @@ require("dotenv").config();
 module.exports = {
   siteMetadata: {
     title: "WatchWatch.org",
-    description: "documenting unnecessary police violence",
+    description: "documents police brutality against lawful protesters",
     ...config,
   },
 

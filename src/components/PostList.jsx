@@ -109,10 +109,10 @@ const PostList = ({ cover, path, date, title, excerpt }) => (
   <Wrapper>
     <Image>
 
-      {typeof cover === 'object' &&
+      {typeof cover === 'object' && !!cover &&
         <Img fluid={cover} />
       }
-      {typeof cover === 'string' &&
+      {typeof cover === 'string' && !!cover &&
         <img src={cover || {} || [] || ''} style={{height: '100%', objectFit: 'fill'}} />
       }
     </Image>

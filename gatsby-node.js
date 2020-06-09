@@ -1,6 +1,7 @@
 const path = require('path');
 const _ = require("lodash");
 const fetch = require("node-fetch");
+const urlExists = require('url-exists');
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
@@ -8,17 +9,22 @@ exports.createSchemaCustomization = ({ actions }) => {
     type googleSheetListRow implements Node {
       id: String
       name: String
+      date: String
       city: String
       state: String
+      imageurl: String
       tweet_url: String
       media_filename: String
       youtube_link: String
       comment: String
       slug: String
       fields: fields
+      localImageUrl: File @link(from: "localImageUrl___NODE")
     }
     type fields {
       tweetEmbedData: String
+      youtubeEmbedData: String
+      videoEmbedData: String
     }
   `)
 }
@@ -298,8 +304,15 @@ const getYouTubeEmbedHTML = (url) => {
   return `<iframe width="100%" height="315" src="${iframeSrc}" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>`;
 };
 
+const getHTML5VideoEmbedHTML = (url) => {
+    console.warn("+++++++++ "+url)
+  if(!url || !url.includes('.mp4')) {return ""}
+  return `<video width="50%" controls><source src=${url} type="video/mp4">Your browser does not support the video tag.</video>`;
+};
+
 exports.onCreateNode = async ({ node, actions }) => {
   const { createNodeField } = actions
+
     //handling tweets
   if (node.internal
       && node.internal.owner === 'gatsby-source-google-sheets'
@@ -326,7 +339,7 @@ exports.onCreateNode = async ({ node, actions }) => {
         value: embedDataHTML // field value
     });
   }
-  
+
   //handling youtube videos
   if (node.internal
       && node.internal.owner === 'gatsby-source-google-sheets'
@@ -352,6 +365,30 @@ exports.onCreateNode = async ({ node, actions }) => {
         value: embedDataHTML // field value
     });
   }
+
+
+  //handling videos inside mediafile
+  if (node.internal
+      && node.internal.owner === 'gatsby-source-google-sheets'
+      && node.mediafile
+      && node.mediafile.startsWith("http")
+  ) {
+    const videoLinks = node.mediafile;
+    let embedDataHTML = "";
+    try {
+        videos = videoLinks ? videoLinks.split(",") : [];
+        const embedData = videos.length>0 ? getHTML5VideoEmbedHTML(videos[0]):"";
+        embedDataHTML = embedData || "";
+    } catch (er) {
+      console.warn(`failed to get embed for ${videoLink}`, er)
+    }
+    createNodeField({
+        name: 'videoEmbedData', // field name
+        node, // the node on which we want to add a custom field
+        value: embedDataHTML // field value
+    });
+  }
+
 };
 
 
