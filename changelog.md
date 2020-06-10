@@ -2,7 +2,7 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## v0.2.5 - 2020.06.09
-add 22 new entries [609 total, tgd 439]
+add 22 new entries, cleaned up duplicate entries  [598 total, tgd 439]
 add social media image meta tag
 add the full state name field to the search index
 create new page with listing of each city and number of entries
