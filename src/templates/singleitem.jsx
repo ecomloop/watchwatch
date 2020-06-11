@@ -124,7 +124,7 @@ const SingleItem = ({ data, pageContext }) => {
         <Content input={fields.videoEmbedData} /><br />
         <Content input={fields.tweetEmbedData} /><br />
 
-         <a href="/random" className="button ">See another incident</a> <a target="_blank" href={url} className="button buttonalt">View on Twitter</a>
+         <a href="/random" className="button ">See another incident</a> <a target="_blank" href="https://www.joincampaignzero.org/" rel="noopener noreferrer" className="button buttonalt">Join Campaign Zero</a>
 {/*<Content input={about} /><br />  */}
       </Container>
       <SuggestionBar>
