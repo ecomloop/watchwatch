@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { Layout, Container, Content } from 'layouts';
 import { TagsBlock, Header, SEO } from 'components';
 import '../styles/prism';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 const SuggestionBar = styled.div`
   display: flex;
@@ -97,6 +99,8 @@ const SingleItem = ({ data, pageContext }) => {
   const { next, prev } = pageContext;
   const { name, date, slug, imageurl, url, fields, mediafile, category, tags, localImageUrl, about, state, city } = data.googleSheetListRow
 
+  const [open, setOpen] = React.useState(false)
+
   //converting comma seperated tags to tags map
   const tagsList = tags ? tags.split(',') : [];
   const image = localImageUrl ? localImageUrl.childImageSharp.fluid.src : imageurl;
@@ -124,8 +128,18 @@ const SingleItem = ({ data, pageContext }) => {
         <Content input={fields.videoEmbedData} /><br />
         <Content input={fields.tweetEmbedData} /><br />
 
-         <a href="/random" className="button ">See another incident</a> <a target="_blank" href="https://www.joincampaignzero.org/" rel="noopener noreferrer" className="button buttonalt">Join Campaign Zero</a>
-{/*<Content input={about} /><br />  */}
+        <a href="/random" className="button ">See another incident</a>
+        <a className="button buttonalt" href="javascript:void(0)" onClick={() => setOpen(true)}>
+          Join Campaign Zero
+        </a>
+        <Modal open={open} onClose={() => setOpen(false)} center>
+          <h3>Help end police brutality</h3>
+          <p>
+            Learn about sensible policy solutions & take action
+          </p>
+          <a target="_blank" href="https://www.joincampaignzero.org/" rel="noopener noreferrer" className="button buttonalt">Join Campaign Zero</a>
+        </Modal>
+        {/*<Content input={about} /><br />  */}
       </Container>
       <SuggestionBar>
         <PostSuggestion>

@@ -1,6 +1,15 @@
 # Change Log
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v0.2.7 - 2020.06.17
+added 174 new entries [788 total, tgd 537]
+removed duplicate entries
+cleaned up image entries
+
+## v0.2.6 - 2020.06.10
+added 16 new entries [614 total, tgd 450]
+enabled incremental builds
+
 ## v0.2.5 - 2020.06.09
 add 22 new entries, cleaned up duplicate entries  [598 total, tgd 439]
 add social media image meta tag

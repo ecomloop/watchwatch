@@ -5,14 +5,13 @@
   "description": "documenting police brutality against protesters",
   "homepage": "https://watchwatch.org",
   "license": "MIT",
-  "version": "0.2.5",
+  "version": "0.2.7",
   "repository": {
     "type": "git",
     "url": "https://github.com/ecomloop/watchwatch"
   },
   "scripts": {
     "develop": "gatsby develop",
-    "build": "gatsby build",
     "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
     "serve": "gatsby serve",
     "clean": "rm -rf public && rm -rf .cache",
@@ -64,6 +63,7 @@
     "react-headroom": "^2.2.8",
     "react-helmet": "^5.2.1",
     "react-instantsearch-dom": "^6.4.0",
+    "react-responsive-modal": "^5.0.2",
     "react-typeform-embed": "^0.2.1",
     "react-typography": "^0.16.19",
     "styled-components": "^5.1.0",
