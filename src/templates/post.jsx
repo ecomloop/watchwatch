@@ -81,15 +81,8 @@ export const query = graphql`
         tags
         cover {
           childImageSharp {
-            fluid(
-              maxWidth: 1920
-              quality: 90
-              duotone: { highlight: "#386eee", shadow: "#2323be", opacity: 60 }
-            ) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-            resize(width: 1200, quality: 90) {
-              src
+            fluid (srcSetBreakpoints: [200, 400]) {
+              ...GatsbyImageSharpFluid
             }
           }
         }

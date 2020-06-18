@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v0.2.7 - 2020.06.18
+implemented build optimizations
+added missing state names to 24 entries
+changed cta & popup to support FairFight.com & ColorOfChange.org
+created new placeholder image for entries without images 
+added 10 new entries [798 total, TGD 542]
+
 ## v0.2.7 - 2020.06.17
 added 174 new entries [788 total, tgd 537]
 removed duplicate entries

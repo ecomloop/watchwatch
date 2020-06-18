@@ -130,14 +130,19 @@ const SingleItem = ({ data, pageContext }) => {
 
         <a href="/random" className="button ">See another incident</a>
         <a className="button buttonalt" href="javascript:void(0)" onClick={() => setOpen(true)}>
-          Join Campaign Zero
+          Stand for Justice
         </a>
         <Modal open={open} onClose={() => setOpen(false)} center>
-          <h3>Help end police brutality</h3>
+          <h3>Stand for Justice! End Police Brutality! </h3>
+
           <p>
-            Learn about sensible policy solutions & take action
+            <strong>Color Of Change</strong> helps you do something real about injustice. They design campaigns powerful enough to end practices that unfairly hold Black people back, and champion solutions that move us all forward. Until justice is real.
           </p>
-          <a target="_blank" href="https://www.joincampaignzero.org/" rel="noopener noreferrer" className="button buttonalt">Join Campaign Zero</a>
+          <a target="_blank" href="https://colorofchange.org/" rel="noopener noreferrer" className="button">Support Color of Change</a>
+          <p>
+            <strong>Fair Fight</strong> workds to promote fair elections across the country. Voting is the bedrock on which our community’s future and your ambitions are built. Join the fight to ensure access to democracy for all.
+          </p>
+          <a target="_blank" href="https://fairfight.com/" rel="noopener noreferrer" className="button">Support Fair Fight</a>
         </Modal>
         {/*<Content input={about} /><br />  */}
       </Container>
