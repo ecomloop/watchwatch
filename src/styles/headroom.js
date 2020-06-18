@@ -17,6 +17,7 @@ p.center {
     text-align: center;
     margin: 25px;
 }
+h2, h1 {color: #fee12b;}
 
   a{ color: #fee12b;}
   a.button{
@@ -82,7 +83,7 @@ a.button:hover{
     position: fixed;
     transform: translateY(0);
     transition: ${theme.transitions.headroom.transition};
-    background-color: ${theme.colors.white.light};
+    background-color: ${theme.colors.black.base};
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
     nav {
       a {
@@ -107,12 +108,12 @@ a.button:hover{
       }
 
       input {
-        border-color: ${theme.colors.black.base};
-        color: ${theme.colors.black.base};
+        border-color: ${theme.colors.black.light};
+        color: ${theme.colors.black.light};
       }
 
       svg {
-        color: ${theme.colors.black.base} !important;
+        color: ${theme.colors.black.light} !important;
       }
     }
     padding-top: 0.75rem;
