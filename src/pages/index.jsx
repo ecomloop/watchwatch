@@ -58,7 +58,7 @@ const Index = ({ data }) => {
   const [showMore, setShowMore] = React.useState(true);
 
   const { group } = data.citygroup;
-  const cityMapDescSorted = _.orderBy(group, ['totalCount'],['desc']).slice(0,5);
+  const cityMapDescSorted = _.orderBy(group, ['totalCount'],['desc']).slice(0,10);
 
 
   const searchIndices = [
@@ -80,28 +80,38 @@ const Index = ({ data }) => {
   return (
     <Layout>
       <Helmet title={'WatchWatch.org'} />
-      <Header title="documenting police brutality against lawful protesters"></Header>
+      <Header title="reject authoritarianism" date="watchwatch documents authoritarian acts & police violence incidents"></Header>
 
 
       <div className="search_main">
+      <div className="text_main center">
+
+
+
+
+      </div>
         <Search collapse homepage indices={searchIndices} />
       </div>
-      <div className="text_main center">
-      <p>watchwatch.org documents police brutality against lawful protesters</p>
-      <p>inspired by the <a href="https://twitter.com/greg_doucette/status/1266751520055459847" target="_twitter" rel="noopener">massive twitter thread</a> by <a href="https://twitter.com/greg_doucette/" target="_twitter" rel="noopener">@greg_doucette</a></p>
-      <p>original data compiled by <a href="https://twitter.com/jasonemiller" target="_twitter" rel="noopener">@jasonemiiller</a> in a <a href="https://docs.google.com/spreadsheets/d/1YmZeSxpz52qT-10tkCjWOwOGkQqle7Wd1P7ZM1wMW0E/edit#gid=0" target="_twitter" rel="noopener">google spreadsheet</a></p>
-      </div>
+
 
       <ShopSectionSubHeading>
-        Top 5 Cities
+        Top 10 Cities
       </ShopSectionSubHeading>
+
       <ShopWrapper style={{marginTop: "0rem", marginLeft: "3.25rem"}}>
+
         <CityCount list={cityMapDescSorted} />
+<a class="button buttonalt" href="/cities">view all cities</a>
       </ShopWrapper>
+
 
       <ShopSectionSubHeading>
         Latest incidents
+
       </ShopSectionSubHeading>
+        <div className="text_main center">
+      incident numbers refer to <a href="https://twitter.com/greg_doucette/status/1266751520055459847">@greg_doucette's thread</a> of police violence against george floyd protesters
+    </div>
       <ShopWrapper>
 
         {listEdges.map(({ node }) => {

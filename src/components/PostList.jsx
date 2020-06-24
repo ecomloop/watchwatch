@@ -113,7 +113,7 @@ const PostList = ({ cover, path, date, title, excerpt }) => (
         <Img fluid={cover} />
       }
       {typeof cover === 'string' && !!cover &&
-        <img src={cover || {} || [] || ''} style={{height: '100%', objectFit: 'fill'}} />
+        <img src={cover || {} || [] || ''} style={{objectFit: 'cover'}} />
       }
     </Image>
     <StyledLink to={path}>

@@ -35,16 +35,16 @@ const TagWrapper = styled.div`
 
 const Tag = ({ pageContext }) => {
   const { posts, tagName } = pageContext;
-  const upperTag = tagName.charAt(0).toUpperCase() + tagName.slice(1);
-  const title = "Tag: " + tagName;
+  const upperTag = tagName.toUpperCase();
+  const title = "" + tagName + "authoritarian acts & police violence incidents"
 
   return (
     <Layout>
       <SEO
         title={`${title} | ${config.title}`}
       />
-      <Header title={upperTag}>
-        
+      <Header title={upperTag} date="authoritarian acts & police violence incidents">
+
       </Header>
         <TagWrapper>
           {posts.map((node) => (

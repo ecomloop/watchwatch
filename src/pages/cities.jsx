@@ -11,11 +11,11 @@ import _ from 'lodash';
 const Cities = ({ data }) => {
   const { group } = data.allGoogleSheetListRow;
   let cityMapDescSorted = _.orderBy(group, ['totalCount'],['desc']);
-  
+
   return (
     <Layout>
-      <Helmet title={''} />
-      <Header title=""></Header>
+      <Helmet title={'List of all cities'} />
+      <Header title="List of all cities" date="number of recorded authoritarian incidents in parentheses"></Header>
       <CityCount list={cityMapDescSorted} />
     </Layout>
   );

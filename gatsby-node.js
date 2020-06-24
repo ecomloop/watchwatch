@@ -47,13 +47,16 @@ exports.createPages = ({ graphql, actions }) => {
       graphql(
         `
           query {
-            allGoogleSheetListRow {
+            allGoogleSheetListRow (
+              sort: { order: DESC, fields: date }
+            ) {
               edges {
                 node {
                   id
                   name
                   city
                   state
+                  about
                   tweet_url
                   media_filename
                   youtubelink
