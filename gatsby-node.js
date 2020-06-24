@@ -12,6 +12,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       date: String
       city: String
       state: String
+      about: String
       imageurl: String
       tweet_url: String
       media_filename: String
@@ -305,7 +306,6 @@ const getYouTubeEmbedHTML = (url) => {
 };
 
 const getHTML5VideoEmbedHTML = (url) => {
-    console.warn("+++++++++ "+url)
   if(!url || !url.includes('.mp4')) {return ""}
   return `<video width="50%" controls><source src=${url} type="video/mp4">Your browser does not support the video tag.</video>`;
 };
@@ -324,14 +324,13 @@ exports.onCreateNode = async ({ node, actions }) => {
     let embedDataHTML = "";
     try {
       if(isTwitterLink(tweetLink)){
-        console.log("******* Tweet URL = "+tweetLink);
         const embedData = await getTweetBlockquote(tweetLink, []);
         embedDataHTML = embedData ? embedData.html : ""
       } else {
-        console.warn('SKIPPING NON-TWITTER url = '+tweetLink)
+        //console.warn('SKIPPING NON-TWITTER url = '+tweetLink)
       }
     } catch (er) {
-      console.warn(`failed to get blockquote for ${tweetLink}`, er)
+      //console.warn(`failed to get blockquote for ${tweetLink}`, er)
     }
     createNodeField({
         name: 'tweetEmbedData', // field name
@@ -350,14 +349,13 @@ exports.onCreateNode = async ({ node, actions }) => {
     let embedDataHTML = "";
     try {
       if(isYoutubeLink(youtubeLink)){
-        console.log("******* Youtube Link = "+youtubeLink);
         const embedData = getYouTubeEmbedHTML(youtubeLink);
         embedDataHTML = embedData || "";
       } else {
-        console.warn('SKIPPING NON-YOUTUBE Link = '+youtubeLink)
+        //console.warn('SKIPPING NON-YOUTUBE Link = '+youtubeLink)
       }
     } catch (er) {
-      console.warn(`failed to get embed for ${youtubeLink}`, er)
+      //console.warn(`failed to get embed for ${youtubeLink}`, er)
     }
     createNodeField({
         name: 'youtubeEmbedData', // field name
@@ -380,7 +378,7 @@ exports.onCreateNode = async ({ node, actions }) => {
         const embedData = videos.length>0 ? getHTML5VideoEmbedHTML(videos[0]):"";
         embedDataHTML = embedData || "";
     } catch (er) {
-      console.warn(`failed to get embed for ${videoLink}`, er)
+      //console.warn(`failed to get embed for ${videoLink}`, er)
     }
     createNodeField({
         name: 'videoEmbedData', // field name
