@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## v0.4.5 - 2020.06.26
+added 74 entries [1075 total, TGD 645]
+
+## v0.4.4 - 2020.06.26
+changed to show embedded tweets by default instead of links to incident pages
+implemented dark theme on embedded tweets
 
 ## v0.4.0 - 2020.06.24
 listed top 10 cities, add button to full list
