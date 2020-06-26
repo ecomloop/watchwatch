@@ -128,6 +128,7 @@ a.button:hover{
       color: ${theme.colors.black.base};
     }
   }
+
 `;
 
 export default headroom;

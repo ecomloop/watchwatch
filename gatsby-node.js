@@ -247,11 +247,13 @@ const getTweetBlockquote = async (url, opt) => {
   }&hide_media=${
     opt.hideMedia ? '1' : '0'
   }&theme=${
-    opt.theme || ''
+    opt.theme || 'dark'
   }&link_color=${
-    opt.linkColor || ''
+    opt.linkColor || '#fee12b'
   }&widget_type=${
     opt.widgetType || ''
+  }&data-cards=${
+    opt.dataCards || ''
   }&omit_script=true&dnt=true&limit=20&chrome=nofooter`
 
   const response = await fetch(apiUrl);
@@ -327,7 +329,7 @@ exports.onCreateNode = async ({ node, actions }) => {
     let embedDataHTML = "";
     try {
       if(isTwitterLink(tweetLink)){
-        const embedData = await getTweetBlockquote(tweetLink, []);
+        const embedData = await getTweetBlockquote(tweetLink, [{hideThread:1, hideMedia:0, dataCards: "hidden"}]);
         embedDataHTML = embedData ? embedData.html : ""
       } else {
         //console.warn('SKIPPING NON-TWITTER url = '+tweetLink)

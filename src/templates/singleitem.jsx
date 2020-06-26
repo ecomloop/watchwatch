@@ -60,12 +60,13 @@ const StatisticIcon = styled.img`
 `;
 
 const twitterStyles = css`
-blockquote.twitter-tweet {
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap');
+blockquote.twitter-tweet, .twitter-tweet {
   display: inline-block;
-  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
-  font-size: 12px;
+  font-family: 'Anonymous Pro', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 11px;
   font-weight: bold;
-  line-height: 16px;
+  line-height: 14px;
   border-color: #eee #ddd #bbb;
   border-radius: 5px;
   border-style: solid;
@@ -74,23 +75,26 @@ blockquote.twitter-tweet {
   margin: 10px 5px;
   padding: 0 16px 16px 16px;
   max-width: 468px;
+  background: none;
 }
 
-blockquote.twitter-tweet p {
+blockquote.twitter-tweet p, .twitter-tweet p {
   font-size: 16px;
   font-weight: normal;
   line-height: 20px;
+  font-family: 'Anonymous Pro', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
-blockquote.twitter-tweet a {
+blockquote.twitter-tweet a, .twitter-tweet a {
   color: inherit;
   font-weight: normal;
   text-decoration: none;
   outline: 0 none;
+  font-family: 'Anonymous Pro', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
 blockquote.twitter-tweet a:hover,
-blockquote.twitter-tweet a:focus {
+blockquote.twitter-tweet a:focus, .twitter-tweet a:hover {
   text-decoration: underline;
 }
 `

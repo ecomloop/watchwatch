@@ -49,6 +49,19 @@ const ShopWrapper = styled.div`
   }
 `;
 
+const PostsWrapper = styled.div`
+  display: grid;
+  margin: 0 auto;
+  width: 90vw;
+  grid-gap: 1rem;
+  @media (min-width: 501px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 100%;
+  }
+`;
+
 const Index = ({ data }) => {
   const { edges } = data.allMarkdownRemark;
   const rowEdges = data.allGoogleSheetListRow.edges;
@@ -112,8 +125,7 @@ const Index = ({ data }) => {
         <div className="text_main center">
       incident numbers refer to <a href="https://twitter.com/greg_doucette/status/1266751520055459847">@greg_doucette's thread</a> of police violence against george floyd protesters
     </div>
-      <ShopWrapper>
-
+      <PostsWrapper>
         {listEdges.map(({ node }) => {
           return (
             <PostList
@@ -122,10 +134,11 @@ const Index = ({ data }) => {
               path={`/${node.slug}`}
               title={node.name}
               excerpt={node.about && node.about.substring(0, 40) + "..."}
+              tweetdata={node.fields && node.fields.tweetEmbedData}
             />
           );
         })}
-      </ShopWrapper>
+      </PostsWrapper>
       {showMore && listEdges.length > 0 &&
         <div className="center">
             <a className="button" onClick={increaseLimit} style={{cursor: "pointer"}}>
@@ -217,6 +230,9 @@ export const query = graphql`
             }
           }
           imageurl
+          fields {
+            tweetEmbedData
+          }
         }
       }
     }

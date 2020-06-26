@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { useStaticQuery, graphql, Link } from "gatsby"
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
@@ -8,28 +8,16 @@ import { Header, SEO } from 'components';
 import PostList from '../components/PostList';
 import config from '../../config/site';
 
-const StyledLink = styled(Link)`
-  color: ${props => props.theme.colors.white.light};
-  padding: 5px 10px;
-  border: solid 1px #fff;
-  border-radius: 20px;
-  &:hover {
-    color: ${props => props.theme.colors.black.blue};
-    background: ${props => props.theme.colors.white.light};
+const PostsWrapper = styled.div`
+  display: grid;
+  margin: 0 auto;
+  width: 90vw;
+  grid-gap: 1rem;
+  @media (min-width: 501px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
-`;
-
-const TagWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 4rem 4rem 1rem 4rem;
-  @media (max-width: 1000px) {
-    margin: 4rem 2rem 1rem 2rem;
-  }
-  @media (max-width: 700px) {
-    margin: 4rem 1rem 1rem 1rem;
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 100%;
   }
 `;
 
@@ -38,25 +26,58 @@ const Tag = ({ pageContext }) => {
   const upperTag = tagName.toUpperCase();
   const title = "" + tagName + "authoritarian acts & police violence incidents"
 
+  const twitterData = useStaticQuery(graphql`
+    query TwitterQuery {
+      allGoogleSheetListRow(sort: {order: DESC, fields: date}) {
+        edges {
+          node {
+            id
+            name
+            slug
+            fields {
+              tweetEmbedData
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  let postIDs = [];
+  //getting all IDs from posts
+  posts.map(node => {
+    postIDs.push(node.id)
+  });
+
+  const listEdges = [];
+  const rowEdges = twitterData.allGoogleSheetListRow.edges;
+  //filtering based of current tags only
+  rowEdges.map((edge) => {
+    if (postIDs.indexOf(edge.node.id)>=0) {
+      listEdges.push(edge);
+    }
+  })
+
   return (
     <Layout>
       <SEO
         title={`${title} | ${config.title}`}
       />
-      <Header title={upperTag} date="authoritarian acts & police violence incidents">
+      <Header title={upperTag} date="police violence incidents in BLM protests">
 
       </Header>
-        <TagWrapper>
-          {posts.map((node) => (
+      <PostsWrapper>
+        {listEdges.map(({ node }) => {
+          return (
             <PostList
               key={node.name}
-              cover={node.imageurl}
               path={`/${node.slug}`}
               title={node.name}
-              excerpt={node.about && node.about.substring(0,40)+"..."}
+              tweetdata={node.fields && node.fields.tweetEmbedData}
             />
-          ))}
-        </TagWrapper>
+          );
+        })}
+      </PostsWrapper>
 
     </Layout>
   );
