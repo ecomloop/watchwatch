@@ -70,11 +70,13 @@ const StyledLink = styled(Link)`
 
 const Title = styled.h2`
   margin: 1rem;
+  color: white;
 `;
 
 const MainWrapper = styled.article`
   display: flex;
-  background: linear-gradient(
+  background: black;
+  background1: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.5) 0%,
       rgba(0, 0, 0, 0.6) 50%,
@@ -92,7 +94,6 @@ const MainWrapper = styled.article`
 const PostSection = styled.section`
   margin: 1rem;
   width: 90%;
-
 `;
 
 const PostList = ({ cover, path, date, title, excerpt, tweetdata }) => (

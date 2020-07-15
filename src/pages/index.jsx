@@ -66,12 +66,12 @@ const Index = ({ data }) => {
   const { edges } = data.allMarkdownRemark;
   const rowEdges = data.allGoogleSheetListRow.edges;
   const listEdges = [];
-  const maxItems = 12;
+  const maxItems = 15;
   const [limit, setLimit] = React.useState(maxItems);
   const [showMore, setShowMore] = React.useState(true);
 
   const { group } = data.citygroup;
-  const cityMapDescSorted = _.orderBy(group, ['totalCount'],['desc']).slice(0,10);
+  const cityMapDescSorted = _.orderBy(group, ['totalCount'], ['desc']).slice(0, 10);
 
 
   const searchIndices = [
@@ -79,7 +79,15 @@ const Index = ({ data }) => {
   ]
 
   const increaseLimit = () => {
-      setLimit(limit + maxItems);
+    setLimit(limit + maxItems);
+    if (
+      typeof twttr !== `undefined` &&
+      window.twttr.widgets &&
+      typeof window.twttr.widgets.load === `function`
+    ) {
+      console.log("******* reloading tweets")
+      window.twttr.widgets.load()
+    }
   }
 
   //filtering home and food items maximum to 6 items
@@ -88,7 +96,7 @@ const Index = ({ data }) => {
       listEdges.push(edge);
     }
   })
-  if(listEdges.length >= rowEdges.length) setShowMore(false);
+  if (listEdges.length >= rowEdges.length) setShowMore(false);
 
   return (
     <Layout>
@@ -97,12 +105,12 @@ const Index = ({ data }) => {
 
 
       <div className="search_main">
-      <div className="text_main center">
+        <div className="text_main center">
 
 
 
 
-      </div>
+        </div>
         <Search collapse homepage indices={searchIndices} />
       </div>
 
@@ -111,10 +119,10 @@ const Index = ({ data }) => {
         Top 10 Cities
       </ShopSectionSubHeading>
 
-      <ShopWrapper style={{marginTop: "0rem", marginLeft: "3.25rem"}}>
+      <ShopWrapper style={{ marginTop: "0rem", marginLeft: "3.25rem" }}>
 
         <CityCount list={cityMapDescSorted} />
-<a class="button buttonalt" href="/cities">view all cities</a>
+        <a class="button buttonalt" href="/cities">view all cities</a>
       </ShopWrapper>
 
 
@@ -122,8 +130,8 @@ const Index = ({ data }) => {
         Latest incidents
 
       </ShopSectionSubHeading>
-        <div className="text_main center">
-      incident numbers refer to <a href="https://twitter.com/greg_doucette/status/1266751520055459847">@greg_doucette's thread</a> of police violence against george floyd protesters
+      <div className="text_main center">
+        incident numbers refer to <a href="https://twitter.com/greg_doucette/status/1266751520055459847">@greg_doucette's thread</a> of police violence against george floyd protesters
     </div>
       <PostsWrapper>
         {listEdges.map(({ node }) => {
@@ -141,8 +149,8 @@ const Index = ({ data }) => {
       </PostsWrapper>
       {showMore && listEdges.length > 0 &&
         <div className="center">
-            <a className="button" onClick={increaseLimit} style={{cursor: "pointer"}}>
-                Load More
+          <a className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
+            Load More
             </a>
         </div>
       }

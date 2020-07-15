@@ -28,7 +28,7 @@ const SEO = ({ title, description, banner, pathname, article }) => (
       const metaurl = pathname || '/';
       const seo = {
         title: title ? (title + " | "+ defaultTitle) : defaultTitle,
-        description: defaultDescription || description,
+        description: description || defaultDescription,
         image: (metaimage && metaimage.startsWith('http')) ? metaimage : (siteUrl+metaimage) ,
         url: (metaurl && metaurl.startsWith('http')) ? metaurl : (siteUrl+metaurl),
       };
