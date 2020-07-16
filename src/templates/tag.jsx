@@ -62,6 +62,7 @@ const Tag = ({ pageContext }) => {
     <Layout>
       <SEO
         title={`${upperTag} Police Violence Incidents`}
+        description={`see all posts related to ${upperTag} here`}
       />
       <Header title={upperTag} date="police violence incidents in BLM protests">
 
