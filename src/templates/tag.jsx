@@ -24,7 +24,7 @@ const PostsWrapper = styled.div`
 const Tag = ({ pageContext }) => {
   const { posts, tagName } = pageContext;
   const upperTag = tagName.toUpperCase();
-  const title = "" + tagName + "authoritarian acts & police violence incidents"
+  const title = "" + tagName + ""
 
   const twitterData = useStaticQuery(graphql`
     query TwitterQuery {
@@ -64,7 +64,7 @@ const Tag = ({ pageContext }) => {
         title={`${upperTag} Police Violence Incidents`}
         description={`see all posts related to ${upperTag} here`}
       />
-      <Header title={upperTag} date="police violence incidents in BLM protests">
+      <Header title={upperTag} date={`police brutality cases tagged with ${tagName}`}>
 
       </Header>
       <PostsWrapper>
@@ -72,7 +72,7 @@ const Tag = ({ pageContext }) => {
           return (
             <PostList
               key={node.name}
-              path={`/${node.slug}`}
+              path={`/case/${node.slug}`}
               title={node.name}
               tweetdata={node.fields && node.fields.tweetEmbedData}
             />

@@ -132,9 +132,9 @@ const SingleItem = ({ data, pageContext }) => {
         <Content input={fields.videoEmbedData} /><br />
         <Content input={fields.tweetEmbedData} /><br />
 
-        <a href="/random" className="button ">See another incident</a>
+        <a href="/random" className="button ">See another police brutality case </a>
         <a className="button buttonalt" href="javascript:void(0)" onClick={() => setOpen(true)}>
-          Stand for Justice
+          Help end police Violence
         </a>
         <Modal open={open} onClose={() => setOpen(false)} center>
           <h3>Stand for Justice! End Police Brutality! </h3>

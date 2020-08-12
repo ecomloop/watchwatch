@@ -124,7 +124,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         //create pages
         sheetRows.forEach(({ node }, index) => {
-          const path = '/' + node.slug;
+          const path = '/case/' + node.slug;
           const prev = index === 0 ? null : sheetRows[index - 1].node;
           const next =
             index === sheetRows.length - 1 ? null : sheetRows[index + 1].node;

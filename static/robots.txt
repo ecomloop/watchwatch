@@ -1,4 +1,6 @@
 User-agent: *
 Disallow: /admin
+Disallow: /tags/tgd-*
+
 
 sitemap: /sitemap.xml
