@@ -148,20 +148,22 @@ const NavBar = () => {
           WatchWatch.org
       </StyledLink>
       <NavWrapper>
-        <Nav>
+      <NavWrapper>
+      <Nav>
         <div className="dropdown">
-                    <Link to="/list">view </Link>
-                    <div className="dropdown-content">
+          <Link to="/list">view </Link>
+          <div className="dropdown-content">
+            {uniqueCategoriesMap.map((item) => (
+              <Link key={item.url} to={`/category/${item.url}`} > {item.text}</Link>
+            ))}
+          </div>
+        </div>
 
-                        <Link key="123" to={`/tags/greg%20doucette`} >Cases from Greg Doucette </Link>
-
-                    </div>
-                  </div>
-
-          <SearchWrapper>
-            <Search collapse indices={searchIndices} variation={"light"} />
-          </SearchWrapper>
-        </Nav>
+        <SearchWrapper>
+          <Search collapse indices={searchIndices} variation={"light"} />
+        </SearchWrapper>
+      </Nav>
+    </NavWrapper>
       </NavWrapper>
     </Headroom >
   );
