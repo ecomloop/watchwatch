@@ -12,7 +12,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
 const PostSectionHeading = styled.h1`
-  margin-left: 4rem;
+  margin-top: 4rem;
 `;
 
 const PostWrapper = styled.div`
@@ -30,11 +30,11 @@ const PostWrapper = styled.div`
 `;
 
 const ShopSectionHeading = styled.h1`
-  margin-left: 4rem;
+  margin-top: 4rem;
 `;
 
 const ShopSectionSubHeading = styled.h3`
-  margin-left: 4rem;
+  margin-top: 4rem;
 `;
 
 const ShopWrapper = styled.div`
@@ -104,7 +104,7 @@ const Index = ({ data }) => {
   return (
     <Layout>
       <Helmet title={'WatchWatch Police Brutality Cases | Police Violence '} />
-      <Header title="WatchWatch Police Brutality Cases" date="search & view 1000+ police brutality cases & police violence incidents"></Header>
+      <Header title="WatchWatch Police Brutality Cases" date=""></Header>
 
 
       <div className="search_main">
@@ -117,15 +117,19 @@ const Index = ({ data }) => {
         <Search collapse homepage indices={searchIndices} />
       </div>
       <ShopSectionSubHeading style={{ marginTop: "5rem", 'text-align': "center" }}>
-        Police brutality cases are widespread. Help end police violence.
+        Police brutality cases are widespread.<br/>
       </ShopSectionSubHeading>
-        <ShopWrapper style={{ margin: "3rem auto", 'text-align': "center", width: "700px"}}>
-      <a href="/random" className="button ">See a police brutality case </a>
+      <ShopWrapper style={{ margin: "1rem auto", 'text-align': "center", width:"67%", display: "block" }}>
+      WatchWatch documents hundreds of cases of police violence and law enformcement brutality.
+      </ShopWrapper>
+
+        <ShopWrapper style={{ margin: "3rem auto", 'text-align': "center", width:"67%", display: "block" }}>
+      <a href="/random" className="button ">WatchWatch a police brutality case</a><div></div>
       <a className="button buttonalt" href="javascript:void(0)" onClick={() => setOpen(true)}>
         Help end police Violence
       </a>
       <Modal open={open} onClose={() => setOpen(false)} center>
-        <h3>Police brutality cases are widespread! Help end police violence! </h3>
+        <h3>Police brutality cases are widespread!<br/>Help end police violence! </h3>
 
         <p>
           <strong>Color Of Change</strong> helps you do something real about injustice. They design campaigns powerful enough to end practices that unfairly hold Black people back, and champion solutions that move us all forward. Until justice is real.
@@ -141,7 +145,7 @@ const Index = ({ data }) => {
 
 
       <ShopSectionSubHeading style={{ margin: "8rem 0 0 0", 'text-align': "center", }}>
-        View police brutality cases from <a href="/category/george-floyd-protests/">George Floyd protests</a>
+        WatchWatch police brutality cases from <a href="/category/george-floyd-protests/">George Floyd protests</a>
 
       </ShopSectionSubHeading>
       <div className="text_main center">
