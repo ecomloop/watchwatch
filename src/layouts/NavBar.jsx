@@ -151,7 +151,7 @@ const NavBar = () => {
       <NavWrapper>
       <Nav>
         <div className="dropdown">
-          <Link to="/list">view </Link>
+          <Link to="">view </Link>
           <div className="dropdown-content">
             {uniqueCategoriesMap.map((item) => (
               <Link key={item.url} to={`/category/${item.url}`} > {item.text}</Link>

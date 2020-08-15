@@ -27,17 +27,32 @@ const CategoryWrapper = styled.div`
 
 const Category = ({ data, pageContext }) => {
   const { category } = pageContext;
-  const categoryHeading = "Category: " + category;
+  const categoryHeading = category;
   const { edges } = data.allGoogleSheetListRow;
+
+  const maxItems = 9;
+  const [limit, setLimit] = React.useState(maxItems);
+  const [showMore, setShowMore] = React.useState(true);
+
+  const increaseLimit = () => {
+    setLimit(limit + maxItems);
+  }
+
+  //Now limiting the items as per limit
+  const limitedEdges = _.slice(edges, 0, limit)
+
   return (
     <Layout>
-      <Helmet title={'WatchWatch : ' + categoryHeading} />
+      <Helmet title={categoryHeading} />
       <Header title={categoryHeading}></Header>
       <CategoryHeading>{categoryHeading}</CategoryHeading>
       <CategoryWrapper>
-        {edges.map(({ node }) => (
+      WatchWatch hundreds of police brutality incidents from {category}
+      </CategoryWrapper>
+      <CategoryWrapper>
+        {limitedEdges.map(({ node },index) => (
           <ShopList
-            key={node.name}
+            key={index}
             cover={node.localImageUrl && node.localImageUrl.childImageSharp && node.localImageUrl.childImageSharp.fluid}
             path={`/${node.name}`}
             title={node.name}
@@ -46,6 +61,13 @@ const Category = ({ data, pageContext }) => {
           />
         ))}
       </CategoryWrapper>
+      {showMore && limitedEdges.length > 0 && limitedEdges.length < edges.length &&
+        <div className="center">
+          <button className="button" onClick={increaseLimit} style={{ cursor: "pointer" }} >
+            Load More
+            </button>
+        </div>
+      }
     </Layout>
   );
 };
@@ -67,6 +89,14 @@ export const query = graphql`
           url
           about
           slug
+          localImageUrl {
+            childImageSharp {
+              fluid (srcSetBreakpoints: [200, 400]) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+          imageurl
         }
       }
 

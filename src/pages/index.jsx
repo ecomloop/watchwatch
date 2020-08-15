@@ -129,7 +129,7 @@ const Index = ({ data }) => {
         Help end police Violence
       </a>
       <Modal open={open} onClose={() => setOpen(false)} center>
-        <h3>Police brutality cases are widespread!<br/>Help end police violence! </h3>
+        <h3>Police brutality cases are widespread!<br/>Help end police violence.</h3>
 
         <p>
           <strong>Color Of Change</strong> helps you do something real about injustice. They design campaigns powerful enough to end practices that unfairly hold Black people back, and champion solutions that move us all forward. Until justice is real.

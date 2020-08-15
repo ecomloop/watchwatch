@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 
 const TagsContainer = styled.div`
-  margin: 1rem 0;
+  margin: 1rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,19 +22,21 @@ const TagsContainer = styled.div`
   }
 `;
 
-const TagsBlock = ({ list }) => (
-  <TagsContainer>
-    {list &&
-      list.map(tag => {
-        const upperTag = tag.charAt(0).toUpperCase() + tag.slice(1);
-        return (
-          <Link key={tag} to={`/tags/${tag}`}>
-            <span>{upperTag}</span>
-          </Link>
-        );
-      })}
-  </TagsContainer>
-);
+const TagsBlock = ({ list }) => {    
+
+    return (
+        <TagsContainer>
+            {list && list.map((tag,index) => {
+                const upperTag = tag.charAt(0).toUpperCase() + tag.slice(1);
+                return (
+                    <Link key={index} to={`/tags/${tag}`}>
+                        <span>{upperTag}</span>
+                    </Link>
+                );
+            })}
+        </TagsContainer>
+    )
+};
 
 export default TagsBlock;
 
