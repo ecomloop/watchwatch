@@ -8,6 +8,9 @@ import { TagsBlock, Header, SEO } from 'components';
 import '../styles/prism';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import _ from 'lodash';
+
+
 
 const SuggestionBar = styled.div`
   display: flex;
