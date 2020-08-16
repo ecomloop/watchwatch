@@ -4,8 +4,9 @@ import styled from '@emotion/styled';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Header } from 'components';
-import ShopList from '../components/ShopList';
+import PostList from '../components/PostList';
 import { Layout } from 'layouts';
+import _ from 'lodash';
 
 const CategoryHeading = styled.h1`
   margin-left: 4rem;
@@ -22,6 +23,19 @@ const CategoryWrapper = styled.div`
   }
   @media (max-width: 700px) {
     margin: 4rem 1rem 1rem 1rem;
+  }
+`;
+
+const PostsWrapper = styled.div`
+  display: grid;
+  margin: 0 auto;
+  width: 90vw;
+  grid-gap: 1rem;
+  @media (min-width: 501px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 100%;
   }
 `;
 
@@ -49,18 +63,18 @@ const Category = ({ data, pageContext }) => {
       <CategoryWrapper>
       WatchWatch hundreds of police brutality incidents from {category}
       </CategoryWrapper>
-      <CategoryWrapper>
+      <PostsWrapper>
         {limitedEdges.map(({ node },index) => (
-          <ShopList
-            key={index}
-            cover={node.localImageUrl && node.localImageUrl.childImageSharp && node.localImageUrl.childImageSharp.fluid}
-            path={`/${node.name}`}
-            title={node.name}
-            tags={node.tags && node.tags.split(',')}
-            excerpt={node.about && node.about.substring(0,40)+"..."}
-          />
+          <PostList
+              key={index}
+              cover={node.localImageUrl && node.localImageUrl.childImageSharp.fluid}
+              path={`/case/${node.slug}`}
+              title={node.name}
+              excerpt={node.about && node.about.substring(0, 40) + "..."}
+              tweetdata={node.fields && node.fields.tweetEmbedData}
+            />
         ))}
-      </CategoryWrapper>
+      </PostsWrapper>
       {showMore && limitedEdges.length > 0 && limitedEdges.length < edges.length &&
         <div className="center">
           <button className="button" onClick={increaseLimit} style={{ cursor: "pointer" }} >
@@ -76,7 +90,7 @@ export default Category;
 
 export const query = graphql`
   query($category: String!) {
-    allGoogleSheetListRow(filter: {category: {eq: $category}}) {
+    allGoogleSheetListRow(sort: {fields: date, order: DESC}, filter: {category: {eq: $category}}) {
       edges {
         node {
           date
@@ -97,6 +111,9 @@ export const query = graphql`
             }
           }
           imageurl
+          fields {
+            tweetEmbedData
+          }
         }
       }
 

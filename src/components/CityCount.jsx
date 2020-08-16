@@ -34,8 +34,8 @@ const CityCount = ({ list }) => (
       list.map(item => {
         const upperTag = item.fieldValue.charAt(0).toUpperCase() + item.fieldValue.slice(1);
         return (
-          <Link key={item.fieldValue} to={`/tags/${item.fieldValue.toLowerCase()}`}>
-            <span>{upperTag} - </span><span className="count">{item.totalCount}</span> 
+          <Link key={item.fieldValue} to={`/tags/${_.kebabCase(item.fieldValue.trim())}`}>
+            <span>{upperTag} - </span><span className="count">{item.totalCount}</span>
           </Link>
         );
       })}

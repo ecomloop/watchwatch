@@ -22,14 +22,14 @@ const TagsContainer = styled.div`
   }
 `;
 
-const TagsBlock = ({ list }) => {    
+const TagsBlock = ({ list }) => {
 
     return (
         <TagsContainer>
             {list && list.map((tag,index) => {
                 const upperTag = tag.charAt(0).toUpperCase() + tag.slice(1);
                 return (
-                    <Link key={index} to={`/tags/${tag}`}>
+                    <Link key={index} to={`/tags/${_.kebabCase(tag.trim())}`}>
                         <span>{upperTag}</span>
                     </Link>
                 );
