@@ -10,7 +10,7 @@ import config from '../../config/site';
 
 const PostsWrapper = styled.div`
   display: grid;
-  margin: 0 auto;
+  margin: 0 auto 1rem auto;
   width: 90vw;
   grid-gap: 1rem;
   @media (min-width: 501px) {
@@ -25,6 +25,14 @@ const Tag = ({ pageContext }) => {
   const { posts, tagName } = pageContext;
   const upperTag = tagName.toUpperCase();
   const title = "" + tagName + ""
+
+  const maxItems = 9;
+  const [limit, setLimit] = React.useState(maxItems);
+  const [showMore, setShowMore] = React.useState(true);
+
+  const increaseLimit = () => {
+    setLimit(limit + maxItems);
+  }
 
   const twitterData = useStaticQuery(graphql`
     query TwitterQuery {
@@ -53,10 +61,13 @@ const Tag = ({ pageContext }) => {
   const rowEdges = twitterData.allGoogleSheetListRow.edges;
   //filtering based of current tags only
   rowEdges.map((edge) => {
-    if (postIDs.indexOf(edge.node.id)>=0) {
+    if (postIDs.indexOf(edge.node.id) >= 0) {
       listEdges.push(edge);
     }
   })
+
+  //Now limiting the items as per limit
+  const limitedEdges = _.slice(listEdges, 0, limit)
 
   return (
     <Layout>
@@ -68,7 +79,7 @@ const Tag = ({ pageContext }) => {
 
       </Header>
       <PostsWrapper>
-        {listEdges.map(({ node }) => {
+        {limitedEdges.map(({ node }) => {
           return (
             <PostList
               key={node.name}
@@ -79,7 +90,13 @@ const Tag = ({ pageContext }) => {
           );
         })}
       </PostsWrapper>
-
+      {showMore && limitedEdges.length > 0 && limitedEdges.length < listEdges.length &&
+        <div className="center">
+          <button className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
+            Load More
+          </button>
+        </div>
+      }
     </Layout>
   );
 };

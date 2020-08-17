@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 
 const TagsContainer = styled.div`
   margin: 1rem 0;
