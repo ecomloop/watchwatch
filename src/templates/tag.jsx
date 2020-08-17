@@ -7,6 +7,7 @@ import { Layout, Container } from 'layouts';
 import { Header, SEO } from 'components';
 import PostList from '../components/PostList';
 import config from '../../config/site';
+import _ from 'lodash';
 
 const PostsWrapper = styled.div`
   display: grid;
