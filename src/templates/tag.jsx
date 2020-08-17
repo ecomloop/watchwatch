@@ -92,9 +92,9 @@ const Tag = ({ pageContext }) => {
       </PostsWrapper>
       {showMore && limitedEdges.length > 0 && limitedEdges.length < listEdges.length &&
         <div className="center">
-          <button className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
+          <a className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
             Load More
-          </button>
+          </a>
         </div>
       }
     </Layout>
