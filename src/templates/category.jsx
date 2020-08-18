@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import { Header } from 'components';
+import {SEO,  Header } from 'components';
 import PostList from '../components/PostList';
 import { Layout } from 'layouts';
 import _ from 'lodash';
@@ -42,6 +42,7 @@ const PostsWrapper = styled.div`
 const Category = ({ data, pageContext }) => {
   const { category } = pageContext;
   const categoryHeading = category;
+  const categoryDescription = "WatchWatch hundreds of police brutality incidents from "+category;
   const { edges } = data.allGoogleSheetListRow;
 
   const maxItems = 9;
@@ -57,12 +58,10 @@ const Category = ({ data, pageContext }) => {
 
   return (
     <Layout>
-      <Helmet title={categoryHeading} />
+      <SEO title={categoryHeading} description={categoryDescription}/>
       <Header title={categoryHeading}></Header>
       <CategoryHeading>{categoryHeading}</CategoryHeading>
-      <CategoryWrapper>
-      WatchWatch hundreds of police brutality incidents from {category}
-      </CategoryWrapper>
+      <CategoryWrapper>{categoryDescription}</CategoryWrapper>
       <PostsWrapper>
         {limitedEdges.map(({ node },index) => (
           <PostList
