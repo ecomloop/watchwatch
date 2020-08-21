@@ -64,6 +64,18 @@ const PostsWrapper = styled.div`
   }
 `;
 
+const TextWrapper = styled.div`
+  margin: 0 auto;
+  width: 90vw;
+  grid-gap: 1rem;
+  @media (min-width: 501px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 100%;
+  }
+`;
+
 const Index = ({ data }) => {
   const { edges } = data.allMarkdownRemark;
   const rowEdges = data.allGoogleSheetListRow.edges;
@@ -172,7 +184,7 @@ const Index = ({ data }) => {
             </button>
         </div>
       }
-<ShopWrapper>
+<TextWrapper>
 <h3>Beginning to Understand Police Brutality</h3>
 
 <p ><a href="https://www.nbcnews.com/think/opinion/i-came-cover-aggression-minneapolis-then-i-became-victim-it-ncna1221241">Minneapolis, Minnesota</a>: Police arrest Black/Latino CNN reporter Omar Jimenez and his crew in the middle of a live broadcast on spurious charges. Later that night they shoot photojournalist Linda Tirado in the face with &ldquo;less lethal&rdquo; ammunition, likely a rubber bullet (which are, for the record, actually metal bullets coated in rubber), causing her to lose an eye. Twenty protesters, medics, bystanders, and members of the press were&nbsp;<a href="https://khn.org/news/rubber-bullets-protesters-police-often-violate-own-policies-crowd-control-less-lethal-weapons/">shot directly in the eye</a>&nbsp;in the first month of protests alone, seven of whom lost an eye entirely. Tirado and Jimenez&nbsp;<a href="https://www.vox.com/identities/2020/5/31/21276013/police-targeted-journalists-covering-george-floyd-protests">are just two of dozens</a>&nbsp;of foreign and domestic journalists whom police harassed, arrested, and violently attacked during the protests.</p>
@@ -191,9 +203,19 @@ const Index = ({ data }) => {
 <p >So far, dozens of pieces of legislation have been introduced on the federal, state, and local levels aimed at ending needless violence and death. Laws proposed range from banning chokeholds to whistleblower protections, to requiring officers to intervene when their fellow officers use excessive force. A lot of the legislation has been criticized for lacking teeth or for replicating existing law, however.</p>
 <p >Pennsylvania has already passed&nbsp;<a href="https://apnews.com/c6658f30f875f76c6521ca513a1e5801">two bills</a>&nbsp;inspired by George Floyd (only after, however, Black democrats in the Pennsylvania House&nbsp;<a href="https://apnews.com/da52ef60cc9e6a29fc721875b7055c33">staged a demonstration</a>&nbsp;of their own, commandeering the podium one Monday morning and vowing not to leave until there was actual progress made). Pennsylvania law now bans chokeholds and makes it easier for police departments to share the disciplinary records of officers.</p>
 <p >Minneapolis has agreed to disband its police force, and several more cities have agreed to divert some police funding to social programs. The city of&nbsp;<a href="https://www.forbes.com/sites/rachelsandler/2020/07/14/berkeley-may-become-1st-us-city-to-remove-police-from-traffic-stops/#6809689470fa">Berkley, California has voted</a>&nbsp;to shift traffic enforcement duties away from police and on to unarmed civil servants. They&rsquo;ve also voted to create a Specialized Care Unit that would send crisis care workers to handle non-criminal police calls involving people who are homeless or have a mental illness.</p>
-<p >Allies looking to get involved have options to help.&nbsp;</p>
-</ShopWrapper>
+<p >Allies looking to get involved have options to help.</p>
+<div >
+<a href="/random" className="button ">WatchWatch a police brutality case</a><div></div>
+<a className="button buttonalt" href="javascript:void(0)" onClick={() => setOpen(true)}>
+  Help end police Violence
+</a>
 
+</div>
+</TextWrapper>
+
+<ShopWrapper>
+
+</ShopWrapper>
 
 
     </Layout>
