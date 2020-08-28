@@ -83,8 +83,9 @@ module.exports = {
         // Exclude specific pages or groups of pages using glob parameters
         // See: https://github.com/isaacs/minimatch
         // The example below will exclude the single `path/to/page` and all routes beginning with `category`
-        exclude: [`/tags/tgd*`],
+        exclude: [`*/tgd*`, `/case/*`, `/random/`, `/success/`,  `/post-one`,`/blog/`, '*/website', '/tags/', '*/react',],
         exclude: [`/case/*`],
+        exclude: [`/random/`],
       }
     },
     {
