@@ -84,6 +84,7 @@ module.exports = {
         // See: https://github.com/isaacs/minimatch
         // The example below will exclude the single `path/to/page` and all routes beginning with `category`
         exclude: [`/tags/tgd*`],
+        exclude: [`/case/*`],
       }
     },
     {

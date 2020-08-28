@@ -198,7 +198,7 @@ exports.createPages = ({ graphql, actions }) => {
           const posts = postsByTag[tagName];
 
           createPage({
-            path: `/tags/${_.kebabCase(tagName.trim())}`,
+            path: `/police-brutality/${_.kebabCase(tagName.trim())}`,
             component: tagPosts,
             context: {
               posts,

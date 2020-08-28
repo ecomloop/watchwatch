@@ -73,10 +73,10 @@ const Tag = ({ pageContext }) => {
   return (
     <Layout>
       <SEO
-        title={`${upperTag} Police Violence Incidents`}
-        description={`see all posts related to ${upperTag} here`}
+        title={`${tagName} Police Brutality Cases`}
+        description={`WatchWatch police bruatlity cases in ${tagName}. View cases documented cases of police violence in ${tagName}.`}
       />
-      <Header title={upperTag} date={`police brutality cases tagged with ${tagName}`}>
+      <Header title={`${tagName} Police Brutality Cases`} date={`WatchWatch police brutality cases in ${tagName}`}>
 
       </Header>
       <PostsWrapper>
@@ -93,9 +93,9 @@ const Tag = ({ pageContext }) => {
       </PostsWrapper>
       {showMore && limitedEdges.length > 0 && limitedEdges.length < listEdges.length &&
         <div className="center">
-          <a className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
+          <button className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
             Load More
-          </a>
+          </button>
         </div>
       }
     </Layout>

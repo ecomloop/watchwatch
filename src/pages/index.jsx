@@ -119,6 +119,13 @@ const Index = ({ data }) => {
       <Header title="WatchWatch Police Brutality Cases" date=""></Header>
 
 
+
+      <ShopSectionSubHeading style={{ marginTop: "5rem", 'text-align': "center" }}>
+        Police brutality cases are widespread<br/>
+      </ShopSectionSubHeading>
+      <ShopWrapper style={{ margin: "1rem auto", 'text-align': "center", width:"67%", display: "block" }}>
+      WatchWatch documents hundreds of cases of police violence in cities across the United States.<br/> Search for a location or click to view a police brutaliy case. 
+      </ShopWrapper>
       <div className="search_main">
         <div className="text_main center">
 
@@ -128,13 +135,6 @@ const Index = ({ data }) => {
         </div>
         <Search collapse homepage indices={searchIndices} />
       </div>
-      <ShopSectionSubHeading style={{ marginTop: "5rem", 'text-align': "center" }}>
-        Police brutality cases are widespread.<br/>
-      </ShopSectionSubHeading>
-      <ShopWrapper style={{ margin: "1rem auto", 'text-align': "center", width:"67%", display: "block" }}>
-      WatchWatch documents hundreds of cases of police violence and law enformcement brutality.
-      </ShopWrapper>
-
         <ShopWrapper style={{ margin: "3rem auto", 'text-align': "center", width:"67%", display: "block" }}>
       <a href="/random" className="button ">WatchWatch a police brutality case</a><div></div>
       <a className="button buttonalt" href="javascript:void(0)" onClick={() => setOpen(true)}>

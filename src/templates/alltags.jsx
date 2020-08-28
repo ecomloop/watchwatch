@@ -11,7 +11,7 @@ const Tags = ({ pageContext }) => {
 
     const title = "All Tags Page";
 
-    const maxItems = 10;
+    const maxItems = 25;
     const [limit, setLimit] = React.useState(maxItems);
     const [showMore, setShowMore] = React.useState(true);
 
@@ -35,9 +35,9 @@ const Tags = ({ pageContext }) => {
         <TagsBlock list={limitedList} />
         {showMore && limitedList.length > 0 && limitedList.length < filteredList.length &&
             <div className="center">
-                <a className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
+                <button className="button" onClick={increaseLimit} style={{ cursor: "pointer" }}>
                     Load More
-                </a>
+                </button>
             </div>
         }
       </Container>

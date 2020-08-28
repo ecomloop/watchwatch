@@ -30,7 +30,7 @@ const TagsBlock = ({ list }) => {
             {list && list.map((tag,index) => {
                 const upperTag = tag.charAt(0).toUpperCase() + tag.slice(1);
                 return (
-                    <Link key={index} to={`/tags/${_.kebabCase(tag.trim())}`}>
+                    <Link key={index} to={`/police-brutality/${_.kebabCase(tag.trim())}`}>
                         <span>{upperTag}</span>
                     </Link>
                 );
