@@ -1,21 +1,21 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
-import { navigate } from "@reach/router"
+import { navigate } from "@reach/router";
+import _ from "lodash";
 
 const Random = ({ data }) => {
-  const { edges } = data.allGoogleSheetListRow;
-
-  console.log("Total Shops = "+edges.length);
-  const randomnumber = Math.round(Math.random() * edges.length);
+  const { distinct } = data.allGoogleSheetListRow;  
+  console.log("Total Data = "+distinct.length);
+  const randomnumber = Math.round(Math.random() * distinct.length);
   console.log("Generated Random Number = "+randomnumber);
-  const edge = edges[randomnumber-1] ? edges[randomnumber-1] : edges[0];
-  const randomshopurl = "/case/"+edge.node.slug;
-  console.log("Random URL = "+randomshopurl);
-  navigate(randomshopurl);
+  const randompage = distinct[randomnumber-1] ? distinct[randomnumber-1] : distinct[0];
+  const randompageurl = "/police-brutality/"+_.kebabCase(randompage.trim());
+  console.log("Random URL = "+randompageurl);
+  navigate(randompageurl, { replace: true });
 
   return (
-    <Helmet title={'Random Shop'} />
+    <Helmet title={'Random Page'} />
   );
 
 };
@@ -25,12 +25,7 @@ export default Random;
 export const query = graphql`
   query {
     allGoogleSheetListRow {
-      edges {
-        node {
-          name
-          slug
-        }
-      }
+      distinct(field: state)
     }
   }
 `;

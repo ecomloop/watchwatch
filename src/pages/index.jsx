@@ -6,8 +6,10 @@ import styled from '@emotion/styled';
 import { Header, PostList } from 'components';
 import CityCount from '../components/CityCount';
 import { Layout } from 'layouts';
+import { navigate } from "@reach/router";
 import _ from 'lodash';
 import Search from 'components/search'
+import StateCityNavigator from 'components/StateCityNavigator'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
@@ -31,6 +33,7 @@ const PostWrapper = styled.div`
 
 const ShopSectionHeading = styled.h1`
   margin-top: 4rem;
+
 `;
 
 const ShopSectionSubHeading = styled.h3`
@@ -83,11 +86,13 @@ const Index = ({ data }) => {
   const maxItems = 15;
   const [limit, setLimit] = React.useState(maxItems);
   const [showMore, setShowMore] = React.useState(true);
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false)  
 
   const { group } = data.citygroup;
   const cityMapDescSorted = _.orderBy(group, ['totalCount'], ['desc']).slice(0, 10);
-
+  
+  const allStates = data.allstates.distinct;
+  const allCities = data.allcities.edges;
 
   const searchIndices = [
     { name: `watchwatch`, title: `incidents`, type: `hit` },
@@ -118,8 +123,6 @@ const Index = ({ data }) => {
       <Helmet title={'WatchWatch Police Brutality Cases | Police Violence '} />
       <Header title="WatchWatch Police Brutality Cases" date=""></Header>
 
-
-
       <ShopSectionSubHeading style={{ marginTop: "5rem", 'text-align': "center" }}>
         Police brutality cases are widespread<br/>
       </ShopSectionSubHeading>
@@ -128,13 +131,12 @@ const Index = ({ data }) => {
       </ShopWrapper>
       <div className="search_main">
         <div className="text_main center">
-
-
-
-
         </div>
         <Search collapse homepage indices={searchIndices} />
       </div>
+      <ShopWrapper style={{ margin: "3rem auto", 'text-align': "center", width:"67%", display: "block" }}>
+        <StateCityNavigator allStates={allStates} allCities={allCities} />
+      </ShopWrapper>
         <ShopWrapper style={{ margin: "3rem auto", 'text-align': "center", width:"67%", display: "block" }}>
       <a href="/random" className="button ">WatchWatch a police brutality case</a><div></div>
       <a className="button buttonalt" href="javascript:void(0)" onClick={() => setOpen(true)}>
@@ -276,6 +278,20 @@ export const query = graphql`
      group(field: city) {
         totalCount
         fieldValue
+      }
+    }
+
+    allstates : allGoogleSheetListRow {
+      distinct(field: state)
+    }
+
+    allcities : allGoogleSheetListRow {
+      edges {
+        node {
+          state
+          statecode
+          city
+        }
       }
     }
 
