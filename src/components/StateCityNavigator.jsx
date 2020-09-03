@@ -37,7 +37,7 @@ const StateCityNavigator = ({allStates, allCities}) => {
 			</StyledSelect>
 			{` `}
 			<StyledSelect onChange={e=>{goToCity(e.target.value)}}>
-				<option value="">Select City</option>
+				<option value="">City</option>
 				{filteredCities && filteredCities.map(({node},index)=>(
 					<>
 					{index==0 &&
