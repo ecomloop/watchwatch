@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Headroom from 'react-headroom';
 import logo from '../../static/logo/logo.png';
 import Search from '../components/search'
+import StateCityNavigator from 'components/StateCityNavigator'
 
 const searchIndices = [
   { name: `watchwatch`, title: `incidents`, type: `hit` },
@@ -156,11 +157,15 @@ const NavBar = () => {
             {uniqueCategoriesMap.map((item) => (
               <Link key={item.url} to={`/category/${item.url}`} > {item.text}</Link>
             ))}
+            
+
           </div>
         </div>
 
         <SearchWrapper>
-          <Search collapse indices={searchIndices} variation={"light"} />
+
+          <StateCityNavigator allStates={allStates} allCities={allCities} />
+
         </SearchWrapper>
       </Nav>
     </NavWrapper>

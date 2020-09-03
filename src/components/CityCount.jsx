@@ -36,7 +36,7 @@ const CityCount = ({ list }) => (
         const upperTag = item.fieldValue.charAt(0).toUpperCase() + item.fieldValue.slice(1);
         return (
           <Link key={item.fieldValue} to={`/police-brutality/${_.kebabCase(item.fieldValue.trim())}`}>
-            <span>{upperTag} - </span><span className="count">{item.totalCount}</span>
+            <span>{upperTag} police brutality cases - </span><span className="count">{item.totalCount}</span>
           </Link>
         );
       })}

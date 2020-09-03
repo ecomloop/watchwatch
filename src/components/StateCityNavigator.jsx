@@ -9,35 +9,35 @@ const StyledSelect = styled.select`
 
 const StateCityNavigator = ({allStates, allCities}) => {
 	const [filteredCities, setFilteredCities] = React.useState([])
-	
+
 	const getCitiesFromState = (state) => {
     if(!state || state.length<=0) {
       setFilteredCities([]);
       return;
     }
-    const filtered = _.filter(allCities, ({node}) => node.state == state)    
+    const filtered = _.filter(allCities, ({node}) => node.state == state)
     const unique = _.uniqBy(filtered, ({node}) => node.city)
     setFilteredCities(unique)
   }
-  
+
   const goToCity = (city) => {
     if(!city || city.length<=0) return;
     console.log(city)
     navigate(city);
   }
-	
+
 	return (
 		<div>
-			States : 
+
 			<StyledSelect onChange={e=>{getCitiesFromState(e.target.value)}}>
-				<option value="">--</option>
+				<option value="">Select State</option>
 				{allStates && allStates.map((state)=>(
 					<option value={state}>{state}</option>
 				))}
 			</StyledSelect>
-			{`   `}Cities :
-			<StyledSelect onChange={e=>{goToCity(e.target.value)}}>          
-				<option value="">--</option>
+			{` `}
+			<StyledSelect onChange={e=>{goToCity(e.target.value)}}>
+				<option value="">Select City</option>
 				{filteredCities && filteredCities.map(({node},index)=>(
 					<>
 					{index==0 &&
@@ -46,7 +46,7 @@ const StateCityNavigator = ({allStates, allCities}) => {
 					<option key={node.city} value={`/police-brutality/`+_.kebabCase(node.city.trim())+`-`+_.kebabCase(node.statecode.trim())}>{node.city}</option>
 					</>
 				))}
-			</StyledSelect>	
+			</StyledSelect>
 		</div>
 	);
 }

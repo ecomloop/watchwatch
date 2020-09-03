@@ -76,7 +76,7 @@ const Tag = ({ pageContext }) => {
         title={`${tagName} Police Brutality Cases`}
         description={`WatchWatch police bruatlity cases in ${tagName}. View cases documented cases of police violence in ${tagName}.`}
       />
-      <Header title={`${tagName} Police Brutality Cases`} date={`WatchWatch police brutality cases in ${tagName}`}>
+      <Header title={`${tagName} Police Brutality Cases`} date={`WatchWatch police violence cases in ${tagName}`}>
 
       </Header>
       <PostsWrapper>

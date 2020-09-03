@@ -14,8 +14,8 @@ const Cities = ({ data }) => {
 
   return (
     <Layout>
-      <Helmet title={'List of all cities'} />
-      <Header title="List of all cities" date="number of recorded authoritarian incidents in parentheses"></Header>
+      <Helmet title={'Police Brutality by City'} />
+      <Header title="Police Brutality by City" date="number of documented police violence incidents in parentheses"></Header>
       <CityCount list={cityMapDescSorted} />
     </Layout>
   );
