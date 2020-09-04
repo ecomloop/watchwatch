@@ -6,8 +6,8 @@ export default connectSearchBox(({ refine, variation, ...rest }) => (
   <Form>
     <Input
       type="text"
-      placeholder="Search"
-      aria-label="Search"
+      placeholder="city/state selector"
+      aria-label="city/state selector"
       variation={variation}
       onChange={e => refine(e.target.value)}
       onMouseLeave={e => e.target.blur()}

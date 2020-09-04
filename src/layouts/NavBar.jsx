@@ -5,6 +5,7 @@ import Headroom from 'react-headroom';
 import logo from '../../static/logo/logo.png';
 import Search from '../components/search'
 import StateCityNavigator from 'components/StateCityNavigator'
+import _ from 'lodash'
 
 const searchIndices = [
   { name: `watchwatch`, title: `incidents`, type: `hit` },
@@ -106,7 +107,7 @@ const SearchWrapper = styled.div`
 
 const NavBar = () => {
 
-  const { allGoogleSheetListRow } = useStaticQuery(
+  const { allGoogleSheetListRow, cityGrouped } = useStaticQuery(
     graphql`
       query {
         allGoogleSheetListRow {
@@ -116,9 +117,25 @@ const NavBar = () => {
             }
           }
         }
+        cityGrouped:allGoogleSheetListRow {
+          group(field: city) {
+            totalCount
+            fieldValue
+            edges {
+              node {
+                city
+                statecode
+              }
+            }
+          }
+        }
       }
     `
   )
+  
+  //getting top 5 cities  
+  const cityMapSorted = _.orderBy(cityGrouped.group, ['totalCount'],['desc']);
+  const cityTop5 = _.slice(cityMapSorted,0,5)
 
   // extracting unique categories from the page
   let uniqueCategories = []
@@ -141,7 +158,7 @@ const NavBar = () => {
     }
     uniqueCategoriesMap.push(item)
   })
-  console.log(uniqueCategoriesMap);
+  //console.log(uniqueCategoriesMap);
 
   return (
     <Headroom calcHeightOnResize disableInlineStyles>
@@ -154,8 +171,8 @@ const NavBar = () => {
         <div className="dropdown">
           <Link to="">view </Link>
           <div className="dropdown-content">
-            {uniqueCategoriesMap.map((item) => (
-              <Link key={item.url} to={`/category/${item.url}`} > {item.text}</Link>
+            {cityTop5.map((item,index) => (
+              <Link key={index} to={`/police-brutality/`+_.kebabCase(item.edges[0].node.city.trim())+`-`+_.kebabCase(item.edges[0].node.statecode.trim())} > {item.edges[0].node.city} - {item.edges[0].node.statecode}</Link>
             ))}
 
 
